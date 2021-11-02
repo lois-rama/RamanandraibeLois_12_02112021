@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    height: 91px;
+    background-color: black;
+    align-items: center;
+}
+.navBar{
+    width: 100%;
+}
+
+.navList{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navLink{
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+
+}
+.logo{
+    height: 57px;
+    margin-left: 28px;
+}

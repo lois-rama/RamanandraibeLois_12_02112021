@@ -1,0 +1,18 @@
+.navSidebar{
+    width: 117px;
+    background-color: black;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebarList{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navIcon img{
+    margin-bottom: 20px;
+}
