@@ -2,6 +2,8 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
 }
-html, .App, #root{
+.App{
   height: 100vh;
+
 }
+

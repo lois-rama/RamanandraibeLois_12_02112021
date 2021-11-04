@@ -1,18 +1,27 @@
-.navSidebar{
-    width: 117px;
-    background-color: black;
-    margin: 0;
+.sidebar{
     height: 100%;
     display: flex;
+    flex-direction: column;
+    width: 117px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    background-color: black;
+}
+.navSidebar{
+    margin: 0;
 }
 .sidebarList{
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .navIcon img{
     margin-bottom: 20px;
+}
+.copyrights{
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+    color: white;
+    margin: 0;
 }

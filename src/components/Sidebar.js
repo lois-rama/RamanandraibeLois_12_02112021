@@ -8,6 +8,7 @@ import '../styles/components/Sidebar.css';
 
 function Sidebar(){
 return(
+    <div className="sidebar">
         <nav className="navSidebar">
             <ul className="sidebarList">
                 <li><NavLink to='/' className="navIcon"><img src={meditate} alt=""></img></NavLink></li>
@@ -16,6 +17,8 @@ return(
                 <li><NavLink to='/' className="navIcon"><img src={gym} alt=""></img></NavLink></li>
             </ul>
         </nav>
+        <p className="copyrights">Copyrights, SportSee 2020</p>
+    </div>
 )
 }
 
