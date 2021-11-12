@@ -5,7 +5,7 @@ import '../styles/components/Header.css';
 
 function Header(){
 return(
-    <header>
+    <header className='headernav'>
         <img src={Logo} className='logo' alt='Logo SportSee'></img>
         <nav className="navBar">
             <ul className="navList">
