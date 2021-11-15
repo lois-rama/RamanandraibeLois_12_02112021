@@ -1,7 +1,46 @@
+.chartHeader{
+	display: flex;
+	justify-content: space-between;
+}
+.chartHeader h2{
+	color: #20253A;
+	margin-left: 32px;
+}
 .activityContainer{
     margin-bottom: 25px;
 	border-radius: 5px;
 	background-color: #fbfbfb;
 	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
-	padding: 25px;
+	padding: 24px;
+}
+
+.activityTooltip{
+	text-align: center;
+	font-weight: 500;
+	font-size: 12px;
+	color: white;
+	background-color: #E60000;
+	padding: 9px;
+}
+
+.activityLegend, .chartUnits{
+	display: flex;
+
+}
+
+.legendDot{
+	height: 8px;
+	width: 8px;
+	border-radius: 50%;
+	background-color: #282D30;
+	align-self: center;
+	margin-left: 30px;
+	margin-right: 10px;
+}
+.red{
+	background-color:#E60000 ;
+}
+.activityLegend{
+	align-items: center;
+	color:#74798C ;
 }
