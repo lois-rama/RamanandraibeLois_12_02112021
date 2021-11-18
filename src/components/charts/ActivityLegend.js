@@ -1,5 +1,3 @@
-import react from "react";
-
 function ActivityLegend(){
     return(
         <div className="activityLegend">

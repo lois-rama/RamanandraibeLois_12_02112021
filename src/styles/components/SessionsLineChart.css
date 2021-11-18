@@ -1,0 +1,29 @@
+.lineChart {
+    background-color: #E60000;
+	position: relative;
+    width: 258px;
+	height: 263px;
+    border-radius: 5px;
+}
+
+.sessionsTitle {
+    width: 60%;
+    font-size: 15px;
+	line-height: 24px ;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 34px;
+	top: 29px
+}
+
+.tooltip{
+	background-color: white;
+	padding: 1px 7px 1px 7px;
+}
+.hidden{
+    display: none;
+}
+
+.tooltipText{
+	font-size: 12px;
+}

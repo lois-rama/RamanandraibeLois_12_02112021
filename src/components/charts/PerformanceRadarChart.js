@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { RadarChart,PolarGrid,Radar,PolarAngleAxis,ResponsiveContainer} from 'recharts';
+import { RadarChart,PolarGrid,Radar,PolarAngleAxis} from 'recharts';
 import {getUserPerformance} from '../../service/ApiClient.js'
 import '../../styles/components/PerformanceRadarChart.css'
 
@@ -34,10 +34,12 @@ function PerformanceChart(props) {
     useEffect(() => {
         getPerformanceData();}, []);
 
+        if(data.length === 0) return null
+
     return (
         <div className ="radarChart">
-                <RadarChart width={268} height={253} cx='50%' cy='50%' outerRadius='60%' data={data}>
-                    <PolarGrid />
+                <RadarChart width={258} height={263} outerRadius='60%' data={data}>
+                    <PolarGrid radialLines={false}/>
                     <PolarAngleAxis
                         dataKey='kind'
                         stroke='white'
@@ -46,7 +48,6 @@ function PerformanceChart(props) {
                     />
                     <Radar
                         dataKey='value'
-                        stroke='#FF0101'
                         fill='#FF0101'
                         fillOpacity={0.7}
                     />

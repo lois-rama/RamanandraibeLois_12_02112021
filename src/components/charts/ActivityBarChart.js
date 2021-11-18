@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import ActivityLegend from './ActivityLegend.js';
 import {getUserActivity} from '../../service/ApiClient.js'
 import '../../styles/components/ActivityBarChart.css'
@@ -53,7 +53,7 @@ function ActivityChart(props) {
                             yAxisId='kg'
                             datakey='kilogram'
                             orientation='right'
-                            domain={["dataMin - 1", "dataMax"]}
+                            domain={["dataMin - 1", "dataMax + 2"]}
                             tickCount={3}
                             axisLine={false}
                             tickLine={false}
@@ -63,6 +63,7 @@ function ActivityChart(props) {
                         <YAxis
                             yAxisId='kCal'
                             datakey='calories'
+                            domain={[0, "dataMax + 50"]}
                             hide={true}
                         />
                         <Bar
