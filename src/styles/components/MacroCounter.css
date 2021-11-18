@@ -1,0 +1,30 @@
+.counterCard{
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: 258px;
+    height: 124px;
+}
+.counterCard img{
+    margin-left: 32px;
+    margin-right: 24px;
+}
+.macroType{
+    color: #74798C;
+    font-size: 14px;
+    margin: 0;
+}
+
+.counterText{
+    font-size: 20px;
+    font-weight: 700;
+    color: #282D30;
+    margin: 0;
+}
+@media screen and (max-width:1400px) {
+    .counterCard{
+        width: 210px;
+    }
+    
+}
