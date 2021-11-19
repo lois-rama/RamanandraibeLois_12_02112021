@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import { useState, useEffect } from "react";
+
 import { getUserData } from "../service/ApiClient";
 import DashboardHeader from "../components/DashboardHeader"
 import MacroCounter from "../components/MacroCounter";
@@ -27,6 +28,7 @@ function Dashboard(props){
     const getInfos = async () => {
         const request = await getUserData(id);
         setData(request);
+
         console.log(request)
         setScore([
             { score: request.todayScore || request.score }
@@ -37,7 +39,8 @@ function Dashboard(props){
         getInfos()
     },[])
  
-    if(data.length === 0) return null
+    if(data.length === 0) return null;
+
 
     return( 
         <main>

@@ -1,0 +1,26 @@
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: red;
+
+}
+
+.errorTitle {
+    font-size: 150px;
+    font-weight: 700;
+    margin: 300px 0 0 0;
+} 
+
+.errorText {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.errorLink {
+    font-size: 14px;
+    font-weight: 500;
+    color: red;
+    text-decoration: underline;
+}
