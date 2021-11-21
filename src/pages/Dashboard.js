@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import { useState, useEffect } from "react";
-
+import { Redirect } from "react-router";
 import { getUserData } from "../service/ApiClient";
 import DashboardHeader from "../components/DashboardHeader"
 import MacroCounter from "../components/MacroCounter";
@@ -21,7 +21,6 @@ function Dashboard(props){
 
     const [data, setData] = useState([]);
     const [score, setScore] = useState([]);
-    const {userInfos, keyData} = data
 
     const id = props.match.params.id;
 
@@ -37,16 +36,20 @@ function Dashboard(props){
 
     useEffect( () => {
         getInfos()
+        return () => setData([]);
     },[])
  
     if(data.length === 0) return null;
 
+    //Handle errors on client-side.
+    if(data === 404) return <Redirect to="/404" />
+    if(data === "no response") return <p>Service indisponible.</p>
 
     return( 
         <main>
             <Sidebar />
             <div className="dashboardContent">
-                <DashboardHeader username={userInfos.firstName} />
+                <DashboardHeader username={data.userInfos.firstName} />
                 <div className="wrapper">
                 <section className="secondaryCharts">
                     <ActivityChart id={id} />
@@ -57,10 +60,10 @@ function Dashboard(props){
                     </div>
                 </section>
                 <section className="macroContainer">
-                    <MacroCounter icon={Calorie} counterData={keyData.calorieCount} counterUnit="kCal" macroType="Calories"/>
-                    <MacroCounter icon={Protein} counterData={keyData.proteinCount} counterUnit="g" macroType="Protéines"/>
-                    <MacroCounter icon={Carbs} counterData={keyData.carbohydrateCount} counterUnit="g" macroType="Glucides"/>
-                    <MacroCounter icon={Fat} counterData={keyData.lipidCount} counterUnit="g" macroType="Lipides"/>
+                    <MacroCounter icon={Calorie} counterData={data.keyData.calorieCount} counterUnit="kCal" macroType="Calories"/>
+                    <MacroCounter icon={Protein} counterData={data.keyData.proteinCount} counterUnit="g" macroType="Protéines"/>
+                    <MacroCounter icon={Carbs} counterData={data.keyData.carbohydrateCount} counterUnit="g" macroType="Glucides"/>
+                    <MacroCounter icon={Fat} counterData={data.keyData.lipidCount} counterUnit="g" macroType="Lipides"/>
                 </section>
                 </div>
             </div>

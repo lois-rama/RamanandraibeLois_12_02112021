@@ -20,7 +20,6 @@ function ActivityChart(props) {
     }
 
 
-
     const getActivityData = async () => {
         const request = await getUserActivity(props.id);
 
