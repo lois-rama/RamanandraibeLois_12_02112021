@@ -1,12 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { React } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import ActivityLegend from './ActivityLegend.js';
-import {getUserActivity} from '../../service/ApiClient.js'
+
 import '../../styles/components/ActivityBarChart.css'
 
 function ActivityChart(props) {
-    const [data, setData] = useState([])
-
     const CustomActivityTooltip = ({ active, payload }) => {
         if (active) {
             return (
@@ -19,21 +17,6 @@ function ActivityChart(props) {
         return null;
     }
 
-
-    const getActivityData = async () => {
-        const request = await getUserActivity(props.id);
-
-        for ( let i = 0, length = request.sessions.length; i < length; i++) {
-            request.sessions[i] = {
-                ...request.sessions[i],
-                day: i + 1,
-            };
-        }
-        setData(request.sessions)
-    }
-    useEffect(() => {
-        getActivityData();}, []);
-
         return (
             <div className="activityContainer">
                 <div className="chartHeader">
@@ -42,12 +25,12 @@ function ActivityChart(props) {
                 </div>
                     <BarChart width={835} height={320}
                         margin={{top: 50}}
-                        data={data}
+                        data={props.data}
                         barGap={9}
                     >
                         <CartesianGrid vertical={false} strokeDasharray='2.5 3' />
                         <Tooltip content={<CustomActivityTooltip />} />
-                        <XAxis dataKey='day' axisLine={true} tickLine={false} stroke='#9B9EAC' tick={{ fill: '#9B9EAC' }} dy={10} />
+                        <XAxis dataKey='number' axisLine={true} tickLine={false} stroke='#9B9EAC' tick={{ fill: '#9B9EAC' }} dy={10} />
                         <YAxis
                             yAxisId='kg'
                             datakey='kilogram'
