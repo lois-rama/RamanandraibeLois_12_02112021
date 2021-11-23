@@ -1,10 +1,12 @@
 import { React } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import ActivityLegend from './ActivityLegend.js';
+import PropTypes from 'prop-types'
 
 import '../../styles/components/ActivityBarChart.css'
 
 function ActivityChart(props) {
+
     const CustomActivityTooltip = ({ active, payload }) => {
         if (active) {
             return (
@@ -70,3 +72,7 @@ function ActivityChart(props) {
         );
 }
 export default ActivityChart;
+
+ActivityChart.propTypes = {
+	data: PropTypes.array.isRequired,
+};

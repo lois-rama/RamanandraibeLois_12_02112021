@@ -18,7 +18,9 @@ import '../styles/pages/Dashboard.css';
 
 
 function Dashboard(props){
-
+    /**
+    * Initial state condition is empty array.
+    */
     const [data, setData] = useState([]);
     const [score, setScore] = useState([]);
     const [session, setSession] = useState([]);
@@ -27,6 +29,9 @@ function Dashboard(props){
 
     const id = props.match.params.id;
 
+    /**
+     * Request data from the API and update the state with the fetched data
+     */
     const getInfos = async () => {
         const request = await getUserData(id);
         setData(request);
@@ -42,15 +47,19 @@ function Dashboard(props){
         setPerformance(performanceData)
         
     }
+    /**
+     * After render getInfos gets executed and populate the dashboard
+     */
 
     useEffect( () => {
         getInfos()
+        /** callback function will be executed only when component will be unloaded, to empty the state. */
         return () => setData([]);
     },[])
  
     if(data.length === 0 || activity.length === 0 || session.length === 0) return null;
 
-    //Handle errors on client-side.
+    //**Handle errors on client-side.*/
     console.log(data)
     if(data === 404) return <Redirect to="/404" />
     if(data === "no response" || data === "error" ) return <p>Service indisponible.</p>
@@ -62,10 +71,10 @@ function Dashboard(props){
                 <DashboardHeader username={data.userInfos.firstName} />
                 <div className="wrapper">
                 <section className="secondaryCharts">
-                    <ActivityChart id={id} data={activity} />
+                    <ActivityChart data={activity} />
                    <div className="charts"> 
-                        <SessionsChart id={id} data={session}/>
-                        <PerformanceChart id={id} data={performance} />
+                        <SessionsChart data={session}/>
+                        <PerformanceChart data={performance} />
                         <ScoreChart data={score} />
                     </div>
                 </section>

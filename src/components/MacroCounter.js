@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/components/MacroCounter.css'
+import PropTypes from 'prop-types'
 
 function MacroCounter(props){
     return(
@@ -15,3 +16,9 @@ function MacroCounter(props){
 }
 
 export default MacroCounter
+MacroCounter.propTypes = {
+	icon: PropTypes.string.isRequired,
+    counterData:PropTypes.number.isRequired,
+    counterUnit: PropTypes.string.isRequired,
+    macroType: PropTypes.string.isRequired
+};

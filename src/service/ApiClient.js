@@ -4,17 +4,33 @@ const instance = axios.create({
     baseURL: "http://localhost:3000/user"
 });
 
+/**
+ * Gets the user infos from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
 
 export const getUserData = async (id) => {
-
+    
     try {
         const response = await instance.get(`/${id}`);
-        console.log(response)
-        return response.data.data;
+        const finalResponse = response.data.data;
+    
+        //Modelisation of the data
+        const userModel = {
+            userInfos: finalResponse.userInfos,
+            keyData: finalResponse.keyData,
+            id: finalResponse.id,
+            todayScore: finalResponse.todayScore,
+            score: finalResponse.score,
+        }
+        console.log(userModel)
+        return userModel
     } catch (error) {
         if (error.response) {
           return error.response.status;
-        } else if (error.message === "Network Error") {
+        } else if (error.request) {
           return "no response";
         } else {
             return "error"
@@ -22,12 +38,21 @@ export const getUserData = async (id) => {
     }
 };
 
+/**
+ * Gets the user activity from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+
+
 export const getUserActivity = async (id) => {
     try {
         const response = await instance.get(`/${id}/activity`);
-        console.log(response)
+        
         //Format data to have the number of the weekday in the response.
         const newData = response.data.data.sessions.map(session => ({number: response.data.data.sessions.indexOf(session)+1 ,...session}))
+        console.log(newData)
         return newData;
     } catch (error) {
         if (error.response) {
@@ -40,10 +65,17 @@ export const getUserActivity = async (id) => {
     }
 };
 
+/**
+ * Gets the user performance from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+
 export const getUserPerformance = async (id) => {
     try {
         const response = await instance.get(`/${id}/performance`);
-        console.log(response)
+        //Format data to have the number of the weekday in the response.
         const newData = response.data.data.data.map((data) => {
             switch (data.kind) {
                 case 1:
@@ -62,6 +94,7 @@ export const getUserPerformance = async (id) => {
                     return { ...data};
             }
         });
+        console.log(newData)
         return newData;
     } catch (error) {
         if (error.response) {
@@ -75,10 +108,17 @@ export const getUserPerformance = async (id) => {
     
 };
 
+/**
+ * Gets the user sessions from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+
 export const getUserSessions = async (id) => {
     try {
         const response = await instance.get(`/${id}/average-sessions`);
-        console.log(response)
+        //Format data to have the number of the weekday in the response.
         const newData = response.data.data.sessions.map((session) => {
             switch (session.day) {
                 case 1:
@@ -101,6 +141,8 @@ export const getUserSessions = async (id) => {
             }
             
         });
+        console.log(newData)
+        //Mock data for the session chart to match the design.
         const index0 = {
             day: "",
             sessionLength: 1

@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip,Rectangle} from 'recharts';
 import '../../styles/components/SessionsLineChart.css'
+import PropTypes from 'prop-types';
 
 function SessionsChart(props) {
 
@@ -77,5 +78,7 @@ function SessionsChart(props) {
     );
 }
 
-
 export default SessionsChart;
+SessionsChart.propTypes = {
+	data: PropTypes.array.isRequired,
+};

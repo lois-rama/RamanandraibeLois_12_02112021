@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/components/DashboardHeader.css'
+import PropTypes from 'prop-types'
 
 function DashboardHeader(props){
     return(
@@ -11,3 +12,6 @@ function DashboardHeader(props){
 }
 
 export default DashboardHeader
+DashboardHeader.propTypes = {
+	username: PropTypes.string.isRequired,
+};

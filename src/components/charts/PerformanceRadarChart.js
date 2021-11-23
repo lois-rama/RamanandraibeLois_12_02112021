@@ -1,6 +1,7 @@
 import { React } from 'react';
 import { RadarChart,PolarGrid,Radar,PolarAngleAxis} from 'recharts';
 import '../../styles/components/PerformanceRadarChart.css'
+import PropTypes from 'prop-types'
 
 function PerformanceChart(props) {
     if (props.data.length === 0) {
@@ -27,3 +28,6 @@ function PerformanceChart(props) {
 }
 
 export default PerformanceChart;
+PerformanceChart.propTypes = {
+	data: PropTypes.array.isRequired,
+};

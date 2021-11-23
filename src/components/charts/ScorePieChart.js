@@ -5,6 +5,7 @@ import {
     PolarAngleAxis,
   } from "recharts";
 import '../../styles/components/ScorePieChart.css'
+import PropTypes from 'prop-types'
 
 function ScoreChart(props){
     if (props.data.length === 0) {
@@ -46,3 +47,6 @@ function ScoreChart(props){
 }
 
 export default ScoreChart
+ScoreChart.propTypes = {
+	data: PropTypes.array.isRequired,
+};
