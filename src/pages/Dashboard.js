@@ -48,7 +48,7 @@ function Dashboard(props){
         
     }
     /**
-     * After render getInfos gets executed and populate the dashboard
+     * After render, getInfos() gets executed and populate the dashboard's components
      */
 
     useEffect( () => {
@@ -61,7 +61,7 @@ function Dashboard(props){
 
     //**Handle errors on client-side.*/
     console.log(data)
-    if(data === 404) return <Redirect to="/404" />
+    if(data === "error response") return <Redirect to="/404" />
     if(data === "no response" || data === "error" ) return <p>Service indisponible.</p>
 
     return( 

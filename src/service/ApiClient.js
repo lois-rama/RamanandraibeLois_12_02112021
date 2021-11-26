@@ -10,7 +10,6 @@ const instance = axios.create({
  * @param {string} id the user ID
  * @returns {object} the response from API
  */
-
 export const getUserData = async (id) => {
     
     try {
@@ -29,7 +28,7 @@ export const getUserData = async (id) => {
         return userModel
     } catch (error) {
         if (error.response) {
-          return error.response.status;
+          return "error response";
         } else if (error.request) {
           return "no response";
         } else {
@@ -44,8 +43,6 @@ export const getUserData = async (id) => {
  * @param {string} id the user ID
  * @returns {object} the response from API
  */
-
-
 export const getUserActivity = async (id) => {
     try {
         const response = await instance.get(`/${id}/activity`);
@@ -71,7 +68,6 @@ export const getUserActivity = async (id) => {
  * @param {string} id the user ID
  * @returns {object} the response from API
  */
-
 export const getUserPerformance = async (id) => {
     try {
         const response = await instance.get(`/${id}/performance`);
@@ -114,7 +110,6 @@ export const getUserPerformance = async (id) => {
  * @param {string} id the user ID
  * @returns {object} the response from API
  */
-
 export const getUserSessions = async (id) => {
     try {
         const response = await instance.get(`/${id}/average-sessions`);
