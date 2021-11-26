@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: service/ApiClient.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: service/ApiClient.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from "axios";
+
+const instance = axios.create({
+    baseURL: "http://localhost:3000/user"
+});
+
+/**
+ * Gets the user infos from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+export const getUserData = async (id) => {
+    
+    try {
+        const response = await instance.get(`/${id}`);
+        const finalResponse = response.data.data;
+    
+        //Modelisation of the data
+        const userModel = {
+            userInfos: finalResponse.userInfos,
+            keyData: finalResponse.keyData,
+            id: finalResponse.id,
+            todayScore: finalResponse.todayScore,
+            score: finalResponse.score,
+        }
+        console.log(userModel)
+        return userModel
+    } catch (error) {
+        if (error.response) {
+          return "error response";
+        } else if (error.request) {
+          return "no response";
+        } else {
+            return "error"
+        }
+    }
+};
+
+/**
+ * Gets the user activity from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+export const getUserActivity = async (id) => {
+    try {
+        const response = await instance.get(`/${id}/activity`);
+        
+        //Format data to have the number of the weekday in the response.
+        const newData = response.data.data.sessions.map(session => ({number: response.data.data.sessions.indexOf(session)+1 ,...session}))
+        console.log(newData)
+        return newData;
+    } catch (error) {
+        if (error.response) {
+          return error.response.status;
+        } else if (error.request) {
+          return "no response";
+        } else {
+            return "error"
+        }
+    }
+};
+
+/**
+ * Gets the user performance from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+export const getUserPerformance = async (id) => {
+    try {
+        const response = await instance.get(`/${id}/performance`);
+        //Format data to have the number of the weekday in the response.
+        const newData = response.data.data.data.map((data) => {
+            switch (data.kind) {
+                case 1:
+                    return { ...data, kind: 'Cardio' };
+                case 2:
+                    return { ...data, kind: 'Energie' };
+                case 3:
+                    return { ...data, kind: 'Endurance' };
+                case 4:
+                    return { ...data, kind: 'Force' };
+                case 5:
+                    return { ...data, kind: 'Vitesse' };
+                case 6:
+                    return { ...data, kind: 'Intensité' };
+                default:
+                    return { ...data};
+            }
+        });
+        console.log(newData)
+        return newData;
+    } catch (error) {
+        if (error.response) {
+          return error.response.status;
+        } else if (error.request) {
+          return "no response";
+        } else {
+            return "error"
+        }
+    }
+    
+};
+
+/**
+ * Gets the user sessions from the API SportSee
+ *
+ * @param {string} id the user ID
+ * @returns {object} the response from API
+ */
+export const getUserSessions = async (id) => {
+    try {
+        const response = await instance.get(`/${id}/average-sessions`);
+        //Format data to have the number of the weekday in the response.
+        const newData = response.data.data.sessions.map((session) => {
+            switch (session.day) {
+                case 1:
+                    return { ...session, day: 'L' };
+                case 2:
+                    return { ...session, day: 'M' };
+                case 3:
+                    return { ...session, day: 'M' };
+                case 4:
+                    return { ...session, day: 'J' };
+                case 5:
+                    return { ...session, day: 'V' };
+                case 6:
+                    return { ...session, day: 'S' };
+                case 7:
+                    return { ...session, day: 'D' };
+
+                default:
+                    return { ...session};
+            }
+            
+        });
+        console.log(newData)
+        //Mock data for the session chart to match the design.
+        const index0 = {
+            day: "",
+            sessionLength: 1
+        };
+        const index8 = {
+            day: "",
+            sessionLength: 100
+        }
+        newData.unshift(index0);
+        newData.push(index8)
+        return newData;
+    } catch (error) {
+        if (error.response) {
+          return error.response.status;
+        } else if (error.request) {
+          return "no response";
+        } else {
+            return "error"
+        }
+    } 
+    
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ActivityChart">ActivityChart</a></li><li><a href="global.html#ActivityLegend">ActivityLegend</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MacroCounter">MacroCounter</a></li><li><a href="global.html#PerformanceChart">PerformanceChart</a></li><li><a href="global.html#ScoreChart">ScoreChart</a></li><li><a href="global.html#SessionsChart">SessionsChart</a></li><li><a href="global.html#Sidebar">Sidebar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Nov 26 2021 17:35:45 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

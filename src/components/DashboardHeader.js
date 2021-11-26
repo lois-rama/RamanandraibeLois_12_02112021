@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 
 /**
  * Dashboard Header, display Welcome message
- * @returns HTML
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
  */
 function DashboardHeader(props){
     return(

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Dashboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Dashboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import Sidebar from "../components/Sidebar";
+import { useState, useEffect } from "react";
+import { Redirect } from "react-router";
+import { getUserData, getUserActivity, getUserPerformance, getUserSessions } from "../service/ApiClient";
+import DashboardHeader from "../components/DashboardHeader"
+import MacroCounter from "../components/MacroCounter";
+import SessionsChart from "../components/charts/SessionsLineChart";
+import ActivityChart from "../components/charts/ActivityBarChart";
+import ScoreChart from "../components/charts/ScorePieChart";
+import PerformanceChart from "../components/charts/PerformanceRadarChart";
+import Calorie from '../img/calorie_icon.svg'
+import Carbs from '../img/carbs-icon.svg'
+import Fat from '../img/fat-icon.svg'
+import Protein from '../img/protein-icon.svg'
+
+import '../styles/pages/Dashboard.css';
+
+/**
+ * Dashboard page
+ * @param props Route params
+ * @returns {JSX.Element}
+ */
+function Dashboard(props){
+    /**
+    * Initial state condition is empty array.
+    */
+    const [data, setData] = useState([]);
+    const [score, setScore] = useState([]);
+    const [session, setSession] = useState([]);
+    const [activity, setActivity] = useState([]);
+    const [performance, setPerformance] = useState([]);
+
+    const id = props.match.params.id;
+
+    /**
+     * Request data from the API and update the state with the fetched data
+     */
+    const getInfos = async () => {
+        const request = await getUserData(id);
+        setData(request);
+        setScore([{ score: request.todayScore || request.score }]);
+
+        const activityData = await getUserActivity(id);
+        setActivity(activityData)
+
+        const sessionData =  await getUserSessions(id);
+        setSession(sessionData)
+
+        const performanceData = await getUserPerformance(id);
+        setPerformance(performanceData)
+        
+    }
+    /**
+     * After render, getInfos() gets executed and populate the dashboard's components
+     */
+
+    useEffect( () => {
+        getInfos()
+        /**
+         *  callback function will be executed only when component will be unloaded, to empty the state. 
+         */
+        return () => setData([]);
+    },[])
+ 
+    if(data.length === 0 || activity.length === 0 || session.length === 0) return null;
+
+    /**
+     * Handle errors on client-side.
+     */
+    console.log(data)
+    if(data === "error response") return &lt;Redirect to="/404" />
+    if(data === "no response" || data === "error" ) return &lt;p>Service indisponible.&lt;/p>
+
+    return( 
+        &lt;main>
+            &lt;Sidebar />
+            &lt;div className="dashboardContent">
+                &lt;DashboardHeader username={data.userInfos.firstName} />
+                &lt;div className="wrapper">
+                &lt;section className="secondaryCharts">
+                    &lt;ActivityChart data={activity} />
+                   &lt;div className="charts"> 
+                        &lt;SessionsChart data={session}/>
+                        &lt;PerformanceChart data={performance} />
+                        &lt;ScoreChart data={score} />
+                    &lt;/div>
+                &lt;/section>
+                &lt;section className="macroContainer">
+                    &lt;MacroCounter icon={Calorie} counterData={data.keyData.calorieCount} counterUnit="kCal" macroType="Calories"/>
+                    &lt;MacroCounter icon={Protein} counterData={data.keyData.proteinCount} counterUnit="g" macroType="Protéines"/>
+                    &lt;MacroCounter icon={Carbs} counterData={data.keyData.carbohydrateCount} counterUnit="g" macroType="Glucides"/>
+                    &lt;MacroCounter icon={Fat} counterData={data.keyData.lipidCount} counterUnit="g" macroType="Lipides"/>
+                &lt;/section>
+                &lt;/div>
+            &lt;/div>
+        &lt;/main>
+
+    )
+}
+
+export default Dashboard;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ActivityChart">ActivityChart</a></li><li><a href="global.html#ActivityLegend">ActivityLegend</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#getUserActivity">getUserActivity</a></li><li><a href="global.html#getUserData">getUserData</a></li><li><a href="global.html#getUserPerformance">getUserPerformance</a></li><li><a href="global.html#getUserSessions">getUserSessions</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MacroCounter">MacroCounter</a></li><li><a href="global.html#PerformanceChart">PerformanceChart</a></li><li><a href="global.html#ScoreChart">ScoreChart</a></li><li><a href="global.html#SessionsChart">SessionsChart</a></li><li><a href="global.html#Sidebar">Sidebar</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Nov 26 2021 17:35:45 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
