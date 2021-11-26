@@ -2,6 +2,11 @@ import React from "react";
 import '../styles/components/MacroCounter.css'
 import PropTypes from 'prop-types'
 
+/**
+ * Macro Counter card
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
+ */
 function MacroCounter(props){
     return(
         <div className="counterCard">

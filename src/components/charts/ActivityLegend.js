@@ -1,3 +1,7 @@
+/**
+ * Activity Lengend
+ * @returns {JSX.Element}
+ */
 function ActivityLegend(){
     return(
         <div className="activityLegend">

@@ -3,6 +3,11 @@ import { LineChart, Line, XAxis, YAxis, Tooltip,Rectangle} from 'recharts';
 import '../../styles/components/SessionsLineChart.css'
 import PropTypes from 'prop-types';
 
+/**
+ * Average session duration
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
+ */
 function SessionsChart(props) {
 
     const CustomToolTip = (props) => {

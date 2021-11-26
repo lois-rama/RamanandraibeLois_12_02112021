@@ -3,6 +3,10 @@ import { NavLink } from "react-router-dom";
 import Logo from '../img/logoSportSee.svg'
 import '../styles/components/Header.css';
 
+/**
+ * Header navigation
+ * @returns {JSX.Element}
+ */
 function Header(){
 return(
     <header className='headernav'>

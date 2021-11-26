@@ -3,6 +3,11 @@ import { RadarChart,PolarGrid,Radar,PolarAngleAxis} from 'recharts';
 import '../../styles/components/PerformanceRadarChart.css'
 import PropTypes from 'prop-types'
 
+/**
+ * Performance radar
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
+ */
 function PerformanceChart(props) {
     if (props.data.length === 0) {
 		return null;

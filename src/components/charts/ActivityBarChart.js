@@ -5,6 +5,11 @@ import PropTypes from 'prop-types'
 
 import '../../styles/components/ActivityBarChart.css'
 
+/**
+ * Daily activity
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
+ */
 function ActivityChart(props) {
 
     const CustomActivityTooltip = ({ active, payload }) => {

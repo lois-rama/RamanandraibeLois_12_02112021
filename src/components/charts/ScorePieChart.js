@@ -7,6 +7,11 @@ import {
 import '../../styles/components/ScorePieChart.css'
 import PropTypes from 'prop-types'
 
+/**
+ * Goal Score percentage
+ * @param props data fetch from the API
+ * @returns {JSX.Element}
+ */
 function ScoreChart(props){
     if (props.data.length === 0) {
 		return null;

@@ -16,7 +16,11 @@ import Protein from '../img/protein-icon.svg'
 
 import '../styles/pages/Dashboard.css';
 
-
+/**
+ * Dashboard page
+ * @param props Route params
+ * @returns {JSX.Element}
+ */
 function Dashboard(props){
     /**
     * Initial state condition is empty array.
@@ -53,13 +57,17 @@ function Dashboard(props){
 
     useEffect( () => {
         getInfos()
-        /** callback function will be executed only when component will be unloaded, to empty the state. */
+        /**
+         *  callback function will be executed only when component will be unloaded, to empty the state. 
+         */
         return () => setData([]);
     },[])
  
     if(data.length === 0 || activity.length === 0 || session.length === 0) return null;
 
-    //**Handle errors on client-side.*/
+    /**
+     * Handle errors on client-side.
+     */
     console.log(data)
     if(data === "error response") return <Redirect to="/404" />
     if(data === "no response" || data === "error" ) return <p>Service indisponible.</p>

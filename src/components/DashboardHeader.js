@@ -2,6 +2,10 @@ import React from "react";
 import '../styles/components/DashboardHeader.css'
 import PropTypes from 'prop-types'
 
+/**
+ * Dashboard Header, display Welcome message
+ * @returns HTML
+ */
 function DashboardHeader(props){
     return(
         <header className="messageWrapper">

@@ -6,6 +6,10 @@ import meditate from '../img/sidebar/meditate.svg'
 import swim from '../img/sidebar/swim.svg'
 import '../styles/components/Sidebar.css';
 
+/**
+ * Dashboard Header, display Welcome message
+ * @returns {JSX.Element}
+ */
 function Sidebar(){
 return(
     <div className="sidebar">
