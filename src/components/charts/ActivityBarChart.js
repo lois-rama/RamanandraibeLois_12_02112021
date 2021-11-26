@@ -25,7 +25,7 @@ function ActivityChart(props) {
                     <h2>Activité quotidienne</h2>
                     <ActivityLegend/>
                 </div>
-                    <BarChart width={835} height={320}
+                    <BarChart width={835} height={250}
                         margin={{top: 50}}
                         data={props.data}
                         barGap={9}

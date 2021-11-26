@@ -3,7 +3,12 @@
   font-weight: 500;
 }
 .App{
-  height: 100vh;
-
+  min-height: 100vh;
+}
+#root{
+  min-height: 100vh;
+}
+body{
+  min-height: 100vh;
 }
 
