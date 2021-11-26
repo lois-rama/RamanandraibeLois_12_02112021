@@ -31,7 +31,7 @@ function ActivityChart(props) {
                         barGap={9}
                     >
                         <CartesianGrid vertical={false} strokeDasharray='2.5 3' />
-                        <Tooltip content={<CustomActivityTooltip />} />
+                        <Tooltip content={<CustomActivityTooltip />}/>
                         <XAxis dataKey='number' axisLine={true} tickLine={false} stroke='#9B9EAC' tick={{ fill: '#9B9EAC' }} dy={10} />
                         <YAxis
                             yAxisId='kg'
